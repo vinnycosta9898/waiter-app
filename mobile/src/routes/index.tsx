@@ -4,19 +4,19 @@ import { AppRoutes } from "./app.routes";
 
 export function Routes(){
     const isAuthenticated = false;
-    const loading = true;
+    const loading = false;
 
     if(loading){
         return(
             <View 
                 style={{  
                         flex: 1, 
-                        backgroundColor: "#F5F7FB",
+                        backgroundColor: "#1D1D2E",
                         justifyContent: "center", 
                         alignItems: "center"
                         }}
                         >
-                        <ActivityIndicator size={60} color="#1D1D2E"/>
+                        <ActivityIndicator size={60} color="#FFF"/>
             </View>
         )
     }
