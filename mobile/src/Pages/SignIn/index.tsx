@@ -1,6 +1,17 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from "react-native"
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from "react-native";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function SignIn(){
+    const { user } = useContext(AuthContext)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    function handleLogin(){
+        if(email === "" || password === ""){
+            return;
+        }
+    }
     return(
         <View style={styles.container}>
             <Image
@@ -13,6 +24,8 @@ export function SignIn(){
                     placeholder="Digite o seu email"
                     placeholderTextColor="#F0F0F0"
                     style={styles.input}
+                    value={email}
+                    onChangeText={setEmail}
                 />
 
                 <TextInput
@@ -20,9 +33,11 @@ export function SignIn(){
                     placeholderTextColor="#F0F0F0"
                     style={styles.input}
                     secureTextEntry={true}
+                    value={password}
+                    onChangeText={setPassword}
                 />
 
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
                     <Text style={styles.buttonText}>Acessar</Text>
                 </TouchableOpacity>
 
