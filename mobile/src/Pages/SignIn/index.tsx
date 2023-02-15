@@ -3,14 +3,19 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export function SignIn(){
-    const { user } = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    function handleLogin(){
+    async function handleLogin(){
         if(email === "" || password === ""){
             return;
         }
+
+        await signIn({
+            email, 
+            password
+        })
     }
     return(
         <View style={styles.container}>
