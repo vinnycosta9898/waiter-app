@@ -5,7 +5,7 @@ import { View,
          TextInput
         } from "react-native";
 import { useRoute, RouteProp} from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons';
 
 type RouteDetailParams = {
     Order: {

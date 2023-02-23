@@ -8,8 +8,9 @@ import { View,
 
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackParamsList } from '../../routes/app.routes'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamsList } from '../../routes/app.routes';
+import { api } from '../../services/api';
 
 export function DashBoard() { 
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsList>>();
@@ -20,10 +21,16 @@ export function DashBoard() {
       return;
     }
 
+    const response = await api.post("/order", {
+        table: Number(number)
+    })
+
     navigation.navigate("Order", {
       number: number,
-      order_id: "egihopwkfkeop"
+      order_id: response.data.id
     })
+
+    setNumber("")
 
 
   }
