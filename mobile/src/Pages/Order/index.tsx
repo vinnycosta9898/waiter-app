@@ -2,7 +2,8 @@ import { View,
          Text, 
          StyleSheet, 
          TouchableOpacity,
-         TextInput
+         TextInput,
+         Modal
         } from "react-native";
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
@@ -37,6 +38,8 @@ export function Order(){
             setCategory(response.data)
             setCategorySelected(response.data[0])
         }
+
+        loadInfo();
     }, [])
 
     async function handleCloseOrder(){
