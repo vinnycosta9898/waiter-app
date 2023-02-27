@@ -8,7 +8,8 @@ import { View,
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
-import { api } from '../../services/api'
+import { api } from '../../services/api';
+import { ModalPicker } from '../../components/ModalPicker'
 
 type RouteDetailParams = {
     Order: {
@@ -19,7 +20,7 @@ type RouteDetailParams = {
 
 type OrderRouteProps = RouteProp<RouteDetailParams, "Order">;
 
-type CategoryProps = {
+export type CategoryProps = {
     id: string;
     name: string;
 }
@@ -31,6 +32,7 @@ export function Order(){
     const [category, setCategory] = useState<CategoryProps[] | []>([]);
     const [categorySelected, setCategorySelected] = useState<CategoryProps>();
     const [amount, setAmount] = useState("1");
+    const [modalCategoryVisible, setModalCategoryVisible] = useState(false);
 
     useEffect(() => {
         async function loadInfo(){
@@ -66,7 +68,10 @@ export function Order(){
 
             {
                 category.length !== 0 && (
-                    <TouchableOpacity style={styles.input}>
+                    <TouchableOpacity 
+                        style={styles.input} 
+                        onPress={() => setModalCategoryVisible(true)}
+                    >
                         <Text style={{color: "#FFF"}}>
                             {categorySelected?.name}
                         </Text>
@@ -101,6 +106,18 @@ export function Order(){
                     <Text>Avançar</Text>
                 </TouchableOpacity>
             </View>
+
+            <Modal
+                transparent={true}
+                visible={modalCategoryVisible}
+                animationType="fade"
+            >
+                <ModalPicker
+                    handleCloseModal={() => setModalCategoryVisible(false)}
+                    options={category}
+                    selectedItem={() => {}}
+                />
+            </Modal>
         </View>
 
 
