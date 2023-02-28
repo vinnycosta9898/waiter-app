@@ -11,7 +11,7 @@ import { CategoryProps } from '../../Pages/Order'
 interface ModalPickerProps{
     options: CategoryProps[];
     handleCloseModal: () => void;
-    selectedItem: () => void;
+    selectedItem: (item: CategoryProps) => void;
 }
 
 const {width:WIDTH, height:HEIGHT} = Dimensions.get("window")
@@ -19,7 +19,8 @@ const {width:WIDTH, height:HEIGHT} = Dimensions.get("window")
 export function ModalPicker({ options, handleCloseModal, selectedItem} : ModalPickerProps){
 
     function onPressItem(item : CategoryProps){
-        console.log(item)
+        selectedItem(item);
+        handleCloseModal();
     }
 
     const option = options.map((item, index) => (
